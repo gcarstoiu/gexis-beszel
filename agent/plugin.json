@@ -1,0 +1,45 @@
+{
+  "id": "beszel",
+  "name": "Beszel",
+  "kind": "service",
+  "version": "0.21.1-1",
+  "run": "run",
+  "summary": "Reports how the player is doing - CPU, memory, temperature - to a Beszel hub elsewhere on your network.",
+  "connection": true,
+  "settings": [
+    {
+      "key": "hub",
+      "type": "text",
+      "label": "Hub address",
+      "marks": "N",
+      "note": "The Beszel hub this device reports to. The hub is not on this device.",
+      "placeholder": "http://hub:8090",
+      "default": null,
+      "env": "HUB_URL"
+    },
+    {
+      "key": "token",
+      "type": "text",
+      "label": "Token",
+      "marks": "N",
+      "note": "From the hub's Add System dialog, with the key below.",
+      "secret": true,
+      "placeholder": "Token",
+      "default": null,
+      "env": "TOKEN"
+    },
+    {
+      "key": "key",
+      "type": "text",
+      "label": "Hub public key",
+      "marks": "N",
+      "note": "The hub's own SSH public key. The agent refuses to talk to a hub that cannot prove it is the one named above.",
+      "secret": true,
+      "placeholder": "ssh-ed25519 AAAA...",
+      "default": null,
+      "env": "KEY",
+      "pattern": "ssh-(ed25519|rsa|ecdsa-sha2-nistp(256|384|521)) [A-Za-z0-9+/]+={0,3}( \\S.*)?",
+      "invalid": "That is not the hub's public key. It starts with ssh-ed25519 - copy it from the hub's Add System dialog."
+    }
+  ]
+}

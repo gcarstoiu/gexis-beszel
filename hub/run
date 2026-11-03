@@ -1,0 +1,8 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Beszel's hub as a Gexis Player catalogue plugin (ADR-0174): its page on port
+# 8095 (the player's own page has 8090), its database in the plugin's own
+# folder.
+set -eu
+here=$(dirname "$(readlink -f "$0")")
+exec "$here/beszel-hub" serve --http 0.0.0.0:8095 --dir "$GEXIS_PLUGIN_DATA"

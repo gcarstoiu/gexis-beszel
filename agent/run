@@ -1,0 +1,35 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Beszel's agent as a Gexis Player catalogue plugin (ADR-0174): it reports to
+# the hub named in its settings (HUB_URL, TOKEN and KEY reach it as
+# environment) and keeps its identity in the plugin's own folder.
+#
+# **It listens on nothing** (the player's ADR-0087): the agent opens an inbound
+# SSH port, 45876, unless told `--listen -1`, which is a value its flag parser
+# happens to accept rather than documented behaviour. So two seconds after it
+# starts this looks at what it bound, and stops it - for good, exit 78 - if
+# anything listens there.
+set -eu
+here=$(dirname "$(readlink -f "$0")")
+export DATA_DIR="$GEXIS_PLUGIN_DATA"
+
+"$here/beszel-agent" --listen -1 &
+pid=$!
+trap 'kill -TERM "$pid" 2>/dev/null || true' TERM INT
+
+sleep 2
+if command -v ss > /dev/null 2>&1 && ss -ltn 2>/dev/null | grep -q ':45876[[:space:]]'; then
+	echo "beszel: something listens on 45876 - '--listen -1' no longer keeps the" \
+		"agent's SSH server closed. Refusing to run it." >&2
+	kill -TERM "$pid" 2>/dev/null || true
+	wait "$pid" 2>/dev/null || true
+	exit 78
+fi
+
+status=0
+wait "$pid" || status=$?
+# A TERM interrupts that wait; the agent's own exit is the answer.
+if kill -0 "$pid" 2>/dev/null; then
+	wait "$pid" || status=$?
+fi
+exit "$status"
