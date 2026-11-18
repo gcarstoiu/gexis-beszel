@@ -2,7 +2,7 @@
   "id": "beszel",
   "name": "Beszel",
   "kind": "service",
-  "version": "0.21.1-1",
+  "version": "0.21.2-1",
   "run": "run",
   "summary": "Reports how the player is doing - CPU, memory, temperature - to a Beszel hub elsewhere on your network.",
   "connection": true,

@@ -1,11 +1,11 @@
 # Beszel's release, pinned: both halves come from one upstream version, each
 # tarball by its sha256 (the player's packaging/beszel-*/pins.sh until
 # ADR-0174 moved them here).
-BESZEL_VERSION="v0.21.1"
+BESZEL_VERSION="v0.21.2"
 AGENT_ASSET="beszel-agent_linux_arm64.tar.gz"
-AGENT_SHA256="a6ea544976b9a74398ac88d5da5bb96813d9a2e353a37bbfdb6a903fa8ba1838"
+AGENT_SHA256="4f5dcea27c3f9e2ba30218e7d7039f4df548ded1c470df9eefe00975722aad13"
 HUB_ASSET="beszel_linux_arm64.tar.gz"
-HUB_SHA256="c2357b94d36febfd0c6df9f89f523fff6f6df69a4b8ac91a8b262d2b7fdb0584"
+HUB_SHA256="884f8b16b80032f2782ceead2cae8aaab020232d7277e724cd17bca2b8ef8327"
 BASE="https://github.com/henrygd/beszel/releases/download/${BESZEL_VERSION}"
 # This plugin's own revision, raised with every change to what it packs.
 REVISION=1

@@ -37,7 +37,7 @@ read-only, `/proc` and `/sys` readable, the network open.
 
 The same pins and files give the same bytes, so a listed archive can be
 checked against the tag it was built from. A plugin's version is Beszel's
-plus this repository's revision (`0.21.1-1`).
+plus this repository's revision (`0.21.2-1`).
 
 ## Licence
 
